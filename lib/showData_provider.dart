@@ -13,14 +13,26 @@ class showData extends ChangeNotifier {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: TextField(
-          controller: recieve_Data,
-          decoration: InputDecoration(
-            hintText: 'Enter your Task',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13.0),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+          Text('Enter your task here :',  // This is the text that will appear above the TextField
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'write'),
+        ),
+          SizedBox(height: 20),
+
+            TextField(
+
+              controller: recieve_Data,
+              decoration: InputDecoration(
+                hintText: 'Your task __',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13.0),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
         actions: [
           TextButton(
@@ -51,29 +63,34 @@ class showData extends ChangeNotifier {
   Widget showContainer_text(int index, BuildContext context) {
     return Row(
       children: [
+        // Using IntrinsicHeight to allow dynamic height adjustment
         Container(
-          width: MediaQuery.of(context).size.width * 0.7,
-          height: MediaQuery.of(context).size.height * 0.06,
+          width: MediaQuery.of(context).size.width * 0.6,
           decoration: BoxDecoration(
             color: Colors.black12,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 30),
+            padding: const EdgeInsets.fromLTRB(30, 10, 0, 13),
             child: Text(
               n_list[index]['data'],
               style: TextStyle(
-                  fontSize: 25,
-                  color: n_list[index]['bool'] ? Colors.grey  : Colors.black,
-                  decoration: n_list[index]['bool'] ? TextDecoration.lineThrough : TextDecoration.none,
-                  fontFamily: 'write',
-                  fontWeight: FontWeight.bold),
+                fontSize: 20,
+                color: n_list[index]['bool'] ? Colors.grey : Colors.black,
+                decoration: n_list[index]['bool'] ? TextDecoration.lineThrough : TextDecoration.none,
+                fontFamily: 'write',
+                fontWeight: FontWeight.bold,
+              ),
+
+             // Ensure text is visible when wrapping
             ),
           ),
         ),
       ],
     );
   }
+
+
 
   // Toggle the `bool` value in `n_list`
   bool toggleBool(int index) {
@@ -113,14 +130,22 @@ class showData extends ChangeNotifier {
          showDialog(
              context: context,
              builder: (context)=>AlertDialog(
-               title: TextField(
-                 controller: cr,
-                 decoration: InputDecoration(
-                   hintText: 'Enter your Task',
-                   border: OutlineInputBorder(
-                     borderRadius: BorderRadius.circular(13.0),
+               title: Column(
+                 children: [
+                   Text('Edit your text :',  // This is the text that will appear above the TextField
+                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'write'),
                    ),
-                 ),
+                   SizedBox(height: 20,),
+                   TextField(
+                     controller: cr,
+                     decoration: InputDecoration(
+                       hintText: 'Enter your Task',
+                       border: OutlineInputBorder(
+                         borderRadius: BorderRadius.circular(13.0),
+                       ),
+                     ),
+                   ),
+                 ],
                ),
                actions: [
                  TextButton(
