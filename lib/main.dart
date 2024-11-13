@@ -48,12 +48,26 @@ class uiState extends State<uiBuild> {
       ),
       body: Consumer<showData>(
         builder: (ctx, showdata, __) {
+          bool tr = true;
           return ListView.builder(
             itemCount: showdata.n_list.length,
             itemBuilder: (ctx, index) {
               bool nm = false;
+              if (showdata.n_list.isEmpty || showdata.n_list[0]['data'].toString().trim().isEmpty) {
+                return Center(
+                  child: Text(
+                    'Add a task',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                      fontFamily: 'write',
+                    ),
+                  ),
+                );
+              }
 
-              return Padding(
+             return Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Column(
                   children: [
@@ -87,10 +101,7 @@ class uiState extends State<uiBuild> {
                                         ? Icon(
                                             Icons.check_circle,
                                             color: Colors.green,
-                                            size: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.09,
+                                            size: MediaQuery.of(context).size.width <= 600 ? MediaQuery.of(context).size.width * 0.08 : MediaQuery.of(context).size.width * 0.02,
                                           )
                                         : Container(),
                                   ),

@@ -6,7 +6,14 @@ class showData extends ChangeNotifier {
 
   bool text_show = false;
   List<Map<String, dynamic>> n_list = [];
+
   TextEditingController recieve_Data = TextEditingController();
+
+
+
+   isDataEmpty(int index) {
+
+  }
 
   // Add data with dialog
   openDial(BuildContext context) {
@@ -49,7 +56,8 @@ class showData extends ChangeNotifier {
               };
               n_list.add(data);
               notifyListeners();
-              recieve_Data.clear(); // Clear input field
+              recieve_Data.clear();
+              print('${n_list.length}');// Clear input field
               Navigator.of(context).pop();
             },
             child: Text('SAVE'),
@@ -59,13 +67,20 @@ class showData extends ChangeNotifier {
     );
   }
 
+
+
+
+
   // Show data in container
-  Widget showContainer_text(int index, BuildContext context) {
+
+   Widget showContainer_text(int index, BuildContext context) {
+     print('nlist ${n_list[index]['data'].toString().trim().isEmpty}');
+
     return Row(
       children: [
         // Using IntrinsicHeight to allow dynamic height adjustment
         Container(
-          width: MediaQuery.of(context).size.width * 0.6,
+          width: MediaQuery.of(context).size.width * 0.55,
           decoration: BoxDecoration(
             color: Colors.black12,
             borderRadius: BorderRadius.circular(15),
@@ -85,7 +100,7 @@ class showData extends ChangeNotifier {
              // Ensure text is visible when wrapping
             ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -178,5 +193,6 @@ class showData extends ChangeNotifier {
     );
 
   }
+
 
 }
